@@ -1,24 +1,23 @@
-import React from 'react';
-import ClickerCounter from "./ClickerCounter";
-
+import React from "react";
+import ShowList from "./components/ShowList";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ShowPage from "./components/ShowPage";
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      counter: 0,
-    };
-  }
-
-  handleClick = () => {
-    this.setState({ counter: this.state.counter + 1 });
-  };
-
   render() {
     return (
-      <>
-        <ClickerCounter number={this.state.counter}></ClickerCounter>
-        <button onClick={this.handleClick}>Click!</button>
-      </>
+      <Router>
+        <Switch>
+          <Route path="/show/:id">
+            <ShowPage />
+          </Route>
+          <Route path="/" exact>
+            ShowList: <ShowList />
+          </Route>
+          <Route>
+            <div>404 not found</div>
+          </Route>
+        </Switch>
+      </Router>
     );
   }
 }
